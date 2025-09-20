@@ -1,0 +1,66 @@
+[
+  {
+    "id": 1,
+    "headline": "Apple Reports Record-Breaking Q4 Earnings, Stock Soars",
+    "source": "Financial Times",
+    "summary": "Apple Inc. exceeded analyst expectations with strong iPhone sales and services revenue growth.",
+    "timestamp": "2024-01-15T10:30:00Z",
+    "symbol": "AAPL"
+  },
+  {
+    "id": 2,
+    "headline": "Tesla Faces Production Delays Due to Supply Chain Issues",
+    "source": "Reuters",
+    "summary": "Tesla's latest electric vehicle production has been hampered by global supply chain disruptions.",
+    "timestamp": "2024-01-15T09:15:00Z",
+    "symbol": "TSLA"
+  },
+  {
+    "id": 3,
+    "headline": "Microsoft Announces Major AI Partnership with Leading Tech Firm",
+    "source": "Bloomberg",
+    "summary": "Microsoft's new AI initiative promises to revolutionize cloud computing capabilities.",
+    "timestamp": "2024-01-15T08:45:00Z",
+    "symbol": "MSFT"
+  },
+  {
+    "id": 4,
+    "headline": "Amazon's Prime Day Sales Disappoint, Stock Declines",
+    "source": "Wall Street Journal",
+    "summary": "Amazon's annual Prime Day event failed to meet sales expectations amid economic uncertainty.",
+    "timestamp": "2024-01-15T07:20:00Z",
+    "symbol": "AMZN"
+  },
+  {
+    "id": 5,
+    "headline": "Google's New Search Algorithm Shows Promising Results",
+    "source": "TechCrunch",
+    "summary": "Google's latest search technology improvements have shown significant accuracy gains in testing.",
+    "timestamp": "2024-01-15T06:10:00Z",
+    "symbol": "GOOGL"
+  },
+  {
+    "id": 6,
+    "headline": "Netflix Subscriber Growth Slows in Competitive Market",
+    "source": "CNBC",
+    "summary": "Netflix faces challenges as streaming competition intensifies and consumer spending tightens.",
+    "timestamp": "2024-01-15T05:30:00Z",
+    "symbol": "NFLX"
+  },
+  {
+    "id": 7,
+    "headline": "Meta Platforms Beats Earnings Expectations Despite Ad Market Concerns",
+    "source": "MarketWatch",
+    "summary": "Meta's cost-cutting measures and efficiency improvements drive better-than-expected quarterly results.",
+    "timestamp": "2024-01-15T04:45:00Z",
+    "symbol": "META"
+  },
+  {
+    "id": 8,
+    "headline": "NVIDIA's AI Chip Demand Continues to Surge",
+    "source": "The Verge",
+    "summary": "NVIDIA reports unprecedented demand for its AI processing chips across multiple industries.",
+    "timestamp": "2024-01-15T03:20:00Z",
+    "symbol": "NVDA"
+  }
+]
