@@ -14,9 +14,14 @@ import {
   LinearProgress
 } from '@mui/material';
 import SentimentWordCloud from './SentimentWordCloud';
+import SentimentDistributionChart from './SentimentDistributionChart';
+import ConfidenceGauge from './ConfidenceGauge';
+import SentimentTrendChart from './SentimentTrendChart';
+import NewsSentimentChart from './NewsSentimentChart';
+import RecommendationCard from './RecommendationCard';
 
 const SentimentDashboard = ({ data }) => {
-  const { symbol, overallSentiment, news, newsCount } = data;
+  const { symbol, overallSentiment, news, newsCount, recommendation } = data;
 
   const getSentimentColor = (rating) => {
     switch (rating) {
@@ -53,6 +58,13 @@ const SentimentDashboard = ({ data }) => {
 
   return (
     <Box>
+      {/* Recommendation Card */}
+      <Grid container spacing={3} sx={{ mb: 4 }}>
+        <Grid item xs={12}>
+          <RecommendationCard recommendation={recommendation} />
+        </Grid>
+      </Grid>
+
       {/* Overall Sentiment Summary */}
       <Grid container spacing={3} sx={{ mb: 4 }}>
         <Grid item xs={12} md={4}>
@@ -109,6 +121,22 @@ const SentimentDashboard = ({ data }) => {
         </Grid>
       </Grid>
 
+      {/* Charts Section */}
+      <Grid container spacing={3} sx={{ mb: 4 }}>
+        <Grid item xs={12} md={6}>
+          <SentimentDistributionChart data={data} />
+        </Grid>
+        <Grid item xs={12} md={6}>
+          <ConfidenceGauge confidence={recommendation?.confidence || 50} />
+        </Grid>
+        <Grid item xs={12} md={6}>
+          <SentimentTrendChart symbol={symbol} data={data} />
+        </Grid>
+        <Grid item xs={12} md={6}>
+          <NewsSentimentChart data={data} />
+        </Grid>
+      </Grid>
+
       {/* News List */}
       <Paper elevation={3} sx={{ p: 3 }}>
         <Typography variant="h6" gutterBottom>
@@ -137,20 +165,13 @@ const SentimentDashboard = ({ data }) => {
                   }
                   secondary={
                     <Box>
-                      <Typography variant="body2" color="text.secondary" sx={{ mb: 1 }}>
+                      <Typography component="div" variant="body2" color="text.secondary" sx={{ mb: 1 }}>
                         {item.summary}
                       </Typography>
                       <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                        <Typography variant="caption" color="text.secondary">
-                          Source: {item.source} | {new Date(item.datetime * 1000).toLocaleDateString()}
+                        <Typography component="div" variant="caption" color="text.secondary">
+                          Source: {item.source} | {new Date(item.timestamp).toLocaleDateString()}
                         </Typography>
-                        {item.url && (
-                          <Typography variant="caption" color="primary" sx={{ ml: 2 }}>
-                            <a href={item.url} target="_blank" rel="noopener noreferrer">
-                              Read more →
-                            </a>
-                          </Typography>
-                        )}
                       </Box>
                     </Box>
                   }

@@ -28,6 +28,7 @@ const theme = createTheme({
 function App() {
   const [symbol, setSymbol] = useState('');
   const [sentimentData, setSentimentData] = useState(null);
+  const [recommendationData, setRecommendationData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [lastUpdate, setLastUpdate] = useState(null);
@@ -52,10 +53,28 @@ function App() {
     }
   };
 
-  const handleSubmit = (e) => {
+  const fetchRecommendationData = async (stockSymbol) => {
+    try {
+      const response = await fetch(`/api/recommendations/${stockSymbol}`);
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      const data = await response.json();
+      setRecommendationData(data);
+    } catch (err) {
+      console.error('Error fetching recommendation data:', err);
+      // Don't show error for recommendations as it's optional
+    }
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (symbol.trim()) {
-      fetchSentimentData(symbol.trim().toUpperCase());
+      const stockSymbol = symbol.trim().toUpperCase();
+      await Promise.all([
+        fetchSentimentData(stockSymbol),
+        fetchRecommendationData(stockSymbol)
+      ]);
     }
   };
 
@@ -64,11 +83,18 @@ function App() {
     if (sentimentData && symbol) {
       const interval = setInterval(() => {
         fetchSentimentData(symbol);
+        fetchRecommendationData(symbol);
       }, 30 * 60 * 1000); // 30 minutes
 
       return () => clearInterval(interval);
     }
   }, [sentimentData, symbol]);
+
+  // Combine sentiment and recommendation data
+  const combinedData = sentimentData ? {
+    ...sentimentData,
+    recommendation: recommendationData
+  } : null;
 
   return (
     <ThemeProvider theme={theme}>
@@ -120,8 +146,8 @@ function App() {
           )}
         </Paper>
 
-        {sentimentData && (
-          <SentimentDashboard data={sentimentData} />
+        {combinedData && (
+          <SentimentDashboard data={combinedData} />
         )}
       </Container>
     </ThemeProvider>

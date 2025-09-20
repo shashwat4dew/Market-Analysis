@@ -1,43 +1,50 @@
 const axios = require('axios');
 
 // Test the API endpoints
-const BASE_URL = 'http://localhost:5000';
-
 async function testAPI() {
+  const baseURL = 'http://localhost:5000';
+
   try {
-    console.log('Testing API endpoints...\n');
+    console.log('🧪 Testing API endpoints...\n');
 
     // Test health endpoint
-    console.log('1. Testing health endpoint:');
-    const healthResponse = await axios.get(`${BASE_URL}/api/health`);
-    console.log('✅ Health check:', healthResponse.data);
+    console.log('1. Testing health endpoint...');
+    const healthResponse = await axios.get(`${baseURL}/api/health`);
+    console.log('✅ Health:', healthResponse.data);
 
-    // Test sentiment analysis for AAPL
-    console.log('\n2. Testing sentiment analysis for AAPL:');
-    const sentimentResponse = await axios.get(`${BASE_URL}/api/sentiment/AAPL`);
-    console.log('✅ Sentiment data:', {
+    // Test sentiment endpoint
+    console.log('\n2. Testing sentiment endpoint for AAPL...');
+    const sentimentResponse = await axios.get(`${baseURL}/api/sentiment/AAPL`);
+    console.log('✅ Sentiment:', {
       symbol: sentimentResponse.data.symbol,
-      overallSentiment: sentimentResponse.data.overallSentiment,
+      sentiment: sentimentResponse.data.overallSentiment,
       newsCount: sentimentResponse.data.newsCount
     });
 
-    // Test news endpoint for AAPL
-    console.log('\n3. Testing news endpoint for AAPL:');
-    const newsResponse = await axios.get(`${BASE_URL}/api/news/AAPL`);
-    console.log('✅ News data:', {
-      symbol: newsResponse.data.symbol,
-      count: newsResponse.data.count,
-      firstArticle: newsResponse.data.news[0]?.headline
+    // Test recommendation endpoint
+    console.log('\n3. Testing recommendation endpoint for AAPL...');
+    const recommendationResponse = await axios.get(`${baseURL}/api/recommendations/AAPL`);
+    console.log('✅ Recommendation:', {
+      symbol: recommendationResponse.data.symbol,
+      recommendation: recommendationResponse.data.recommendation,
+      confidence: recommendationResponse.data.confidence,
+      llmOpinion: recommendationResponse.data.llmOpinion.substring(0, 100) + '...'
     });
 
-    console.log('\n🎉 All tests passed! The API is working correctly.');
+    // Test news endpoint
+    console.log('\n4. Testing news endpoint for AAPL...');
+    const newsResponse = await axios.get(`${baseURL}/api/news/AAPL`);
+    console.log('✅ News:', {
+      symbol: newsResponse.data.symbol,
+      count: newsResponse.data.count
+    });
+
+    console.log('\n🎉 All API tests passed!');
 
   } catch (error) {
-    console.error('❌ Test failed:', error.message);
-    if (error.response) {
-      console.error('Response status:', error.response.status);
-      console.error('Response data:', error.response.data);
-    }
+    console.error('❌ API test failed:', error.response?.data || error.message);
+    console.log('\n💡 Make sure the backend server is running:');
+    console.log('   cd backend && npm run dev');
   }
 }
 

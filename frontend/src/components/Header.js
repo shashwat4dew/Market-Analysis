@@ -4,14 +4,14 @@ import TrendingUpIcon from '@mui/icons-material/TrendingUp';
 
 const Header = () => {
   return (
-    <AppBar position="static" color="primary">
+    <AppBar position="static" elevation={0} sx={{ backgroundColor: '#1976d2' }}>
       <Toolbar>
-        <TrendingUpIcon sx={{ mr: 2 }} />
+        <TrendingUpIcon sx={{ mr: 2, fontSize: 28 }} />
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
           Market Sentiment Dashboard
         </Typography>
-        <Typography variant="body2">
-          Real-time Financial Sentiment Analysis
+        <Typography variant="body2" sx={{ opacity: 0.8 }}>
+          AI-Powered Financial Analysis
         </Typography>
       </Toolbar>
     </AppBar>

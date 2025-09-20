@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const sentimentRoutes = require('./routes/sentimentRoutes');
 const newsRoutes = require('./routes/newsRoutes');
+const recommendationRoutes = require('./routes/recommendationRoutes');
 require('dotenv').config();
 
 const app = express();
@@ -14,6 +15,7 @@ app.use(express.json());
 // Routes
 app.use('/api/sentiment', sentimentRoutes);
 app.use('/api/news', newsRoutes);
+app.use('/api/recommendations', recommendationRoutes);
 
 // Health check endpoint
 app.get('/api/health', (req, res) => {
